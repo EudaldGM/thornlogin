@@ -44,20 +44,20 @@ func (q *Queries) DeleteUser(ctx context.Context, name string) error {
 }
 
 const getUser = `-- name: GetUser :one
-SELECT id, name, password FROM users
+SELECT user_id, name, password FROM users
 WHERE name = $1 LIMIT 1
 `
 
 func (q *Queries) GetUser(ctx context.Context, name string) (User, error) {
 	row := q.db.QueryRowContext(ctx, getUser, name)
 	var i User
-	err := row.Scan(&i.ID, &i.Name, &i.Password)
+	err := row.Scan(&i.UserID, &i.Name, &i.Password)
 	return i, err
 }
 
 const getUserGroups = `-- name: GetUserGroups :many
 SELECT
-    groups.id AS group_id,
+    groups.group_id AS group_id,
     groups.groupName AS group_name
 FROM
     user_groups
@@ -96,7 +96,7 @@ func (q *Queries) GetUserGroups(ctx context.Context, userID int32) ([]GetUserGro
 }
 
 const getUsers = `-- name: GetUsers :many
-SELECT id, name, password FROM users
+SELECT user_id, name, password FROM users
 `
 
 func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
@@ -108,7 +108,7 @@ func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
 	var items []User
 	for rows.Next() {
 		var i User
-		if err := rows.Scan(&i.ID, &i.Name, &i.Password); err != nil {
+		if err := rows.Scan(&i.UserID, &i.Name, &i.Password); err != nil {
 			return nil, err
 		}
 		items = append(items, i)

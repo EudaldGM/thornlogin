@@ -5,7 +5,7 @@
 package dbsqlc
 
 type Group struct {
-	ID        int32
+	GroupID   int32
 	Groupname string
 }
 
@@ -15,12 +15,12 @@ type GroupRole struct {
 }
 
 type Role struct {
-	ID       int32
+	RoleID   int32
 	Rolename string
 }
 
 type User struct {
-	ID       int32
+	UserID   int32
 	Name     string
 	Password string
 }

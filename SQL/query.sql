@@ -19,7 +19,7 @@ VALUES ($1);
 
 -- name: GetUserGroups :many
 SELECT
-    groups.id AS group_id,
+    groups.group_id AS group_id,
     groups.groupName AS group_name
 FROM
     user_groups
