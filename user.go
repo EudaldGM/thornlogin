@@ -7,13 +7,17 @@ type user struct {
 	password password
 }
 
+func newUsr(un, pw string) user {
+	user := user{username: un, password: newPassword(pw)}
+	return user
+}
+
 type password struct {
 	password string
 }
 
 func newPassword(pw string) password {
-	var p password
-	p.password = pw
+	p := password{password: pw}
 	return p
 }
 
