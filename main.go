@@ -4,9 +4,8 @@ import "fmt"
 
 func main() {
 	usr := newUsr("things", "wafaw")
-	fmt.Println(usr.username)
-	tkns := createToken(usr)
-	fmt.Println(tkns)
-	tkn, _ := verifyToken(tkns)
+	usr.saltPwd()
+	fmt.Println(usr)
+	fmt.Println(usr.verifyPassword("wafaaw"))
 
 }
